@@ -40,6 +40,64 @@
             transition: 0.4s; border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* --- PCナビゲーションのスタイル --- */
+.pc-nav {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.pc-nav a {
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 0.75rem;
+    letter-spacing: 0.15rem;
+    font-weight: 300;
+    transition: 0.4s;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* 設備・アメニティだけ日本語を小さく添えるとお洒落 */
+/* --- 修正後のCSS --- */
+.pc-nav a span {
+    display: inline;      /* block から inline に変更 */
+    font-size: 0.6rem;    /* 少し小さくするとバランスが良いです */
+    opacity: 0.7;         /* 少し薄くして英語を主役にする */
+    margin-left: 8px;    /* 英語との間に少し隙間を作る */
+    letter-spacing: 0.05rem;
+}
+
+.pc-nav a:hover {
+    color: var(--gold);
+}
+
+/* 下線が中央から広がるホバーエフェクト */
+.pc-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: all 0.4s ease;
+}
+.pc-nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* --- レスポンシブ制御 --- */
+@media (max-width: 1024px) {
+    /* タブレット・スマホではPCナビを消してハンバーガーに集約 */
+    .pc-nav { display: none; }
+    .mobile-menu-btn { display: flex; }
+}
+
+@media (min-width: 1025px) {
+    /* PCではハンバーガーを隠す */
+    .mobile-menu-btn { display: none; }
+}
+
         /* --- ハンバーガーメニュー --- */
         .mobile-menu-btn {
             display: none; width: 60px; height: 60px; background: var(--dark);
@@ -717,23 +775,33 @@ footer {align-items: center;}
 </head>
 <body>
 
-    <header>
-        <a href="#" class="logo">御宿 凪 TAKAYAMA</a>
-        <a href="#" class="reserve-link">RESERVE / 予約</a>
-    </header>
+<header>
+    <a href="index.html" class="logo">御宿 凪 TAKAYAMA</a>
+    
+    <!-- PC用ナビゲーションを追加 -->
+    <nav class="pc-nav">
+        <a href="index.html#intro">CONCEPT</a>
+        <a href="index.html#gallery">GALLERY</a>
+        <a href="index2.html">AMENITY</a>
+        <a href="index.html#thoughts">MESSAGE</a>
+    </nav>
+
+    <a href="https://www.airbnb.jp/rooms/1523001951274371196" class="reserve-link">RESERVE / 予約</a>
+</header>
 
     <button class="mobile-menu-btn" id="menu-toggle">
         <div class="hamburger-lines"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     </button>
 
-    <div class="menu-overlay" id="menu-overlay">
-        <nav class="menu-nav">
-            <a href="#intro">CONCEPT<span>コンセプト</span></a>
-            <a href="#gallery">GALLERY<span>写真帖</span></a>
-            <a href="#thoughts">MESSAGE<span>店主の想い</span></a>
-            <a href="#reserve" style="color: var(--gold);">RESERVE<span>ご予約</span></a>
-        </nav>
-    </div>
+<div class="menu-overlay" id="menu-overlay">
+    <nav class="menu-nav">
+        <a href="index.html#intro">CONCEPT<span>コンセプト</span></a>
+        <a href="index.html#gallery">GALLERY<span>写真帖</span></a>
+        <a href="index2.html">AMENITY<span>設備・アメニティ</span></a> <!-- 追加 -->
+        <a href="#thoughts">MESSAGE<span>店主の想い</span></a>
+        <a href="#reserve" style="color: var(--gold);">RESERVE<span>ご予約</span></a>
+    </nav>
+</div>
 
     <div class="hero">
         <div class="hero-img"></div>
